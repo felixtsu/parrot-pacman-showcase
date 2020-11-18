@@ -1,0 +1,30 @@
+{
+    "name": "[Parrot.201]Pacman.Showcase",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "tilemaps": "github:microsoft/pxt-tilemaps#v1.10.0",
+        "animation": "*",
+        "pxt-turn": "github:felixtsu/pxt-turn#7b515d1e407c56b8bbccb88cd582df0bd802eb8d",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "1.2.9",
+        "pxt": "6.2.21",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "blocksprj"
+}
