@@ -11,14 +11,11 @@ sprites.onOverlap(SpriteKind.Pacman, SpriteKind.Enemy, function (sprite, otherSp
 function teleportToLeft (sprite: Sprite) {
     tiles.placeOnTile(sprite, tiles.getTileLocation(1, 9))
 }
-scene.onHitWall(SpriteKind.EnemyInCenter, function (sprite, location) {
-    randomTurn(sprite, enemyNormalSpeed)
-})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     pacmanDirection = 0
 })
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    pacmanDirection = 2
+scene.onHitWall(SpriteKind.EnemyInCenter, function (sprite, location) {
+    randomTurn(sprite, enemyNormalSpeed)
 })
 function 放置大豆 () {
     for (let 值 of tiles.getTilesByType(myTiles.tile6)) {
@@ -51,8 +48,8 @@ function alignAndTurn (direction: number) {
 function teleportToRight (sprite: Sprite) {
     tiles.placeOnTile(sprite, tiles.getTileLocation(19, 9))
 }
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    pacmanDirection = 1
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    pacmanDirection = 3
 })
 scene.onHitWall(SpriteKind.WeakEnemy, function (sprite, location) {
     randomTurn(sprite, weakEnemySpeed)
@@ -64,78 +61,78 @@ function setEnemySpriteImage (sprite: Sprite) {
     if (sprites.readDataString(sprite, "colour") == "red") {
         sprite.setImage(img`
             . . . . . 2 2 2 2 2 2 . . . . . 
-            . . . . 2 2 2 2 2 2 2 2 . . . . 
             . . . 2 2 2 2 2 2 2 2 2 2 . . . 
             . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-            . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
-            . 2 2 2 2 1 1 2 2 1 1 2 2 2 2 . 
-            . 2 2 2 2 1 f 2 2 1 f 2 2 2 2 . 
+            . 2 2 2 2 1 1 2 2 2 1 1 2 2 2 . 
+            . 2 2 2 1 1 1 1 2 1 1 1 1 2 2 . 
+            2 2 2 2 1 1 8 8 2 1 1 8 8 2 2 2 
+            2 2 2 2 1 1 8 8 2 1 1 8 8 2 2 2 
+            2 2 2 2 2 1 1 2 2 2 1 1 2 2 2 2 
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
             . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            2 2 2 1 1 1 2 1 1 1 2 1 1 1 2 2 
-            2 2 1 1 2 1 1 1 2 1 1 1 2 1 1 2 
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            2 2 2 . . 2 2 . . 2 2 . . 2 2 2 
-            2 2 2 . . 2 2 . . 2 2 . . 2 2 2 
+            . 2 2 2 2 . 2 2 2 2 . 2 2 2 2 . 
+            . . 2 2 . . . 2 2 . . . 2 2 . . 
             `)
     } else if (sprites.readDataString(sprite, "colour") == "blue") {
         sprite.setImage(img`
             . . . . . 9 9 9 9 9 9 . . . . . 
-            . . . . 9 9 9 9 9 9 9 9 . . . . 
             . . . 9 9 9 9 9 9 9 9 9 9 . . . 
             . . 9 9 9 9 9 9 9 9 9 9 9 9 . . 
-            . . 9 9 9 9 9 9 9 9 9 9 9 9 . . 
-            . 9 9 9 9 1 1 9 9 1 1 9 9 9 9 . 
-            . 9 9 9 9 1 f 9 9 1 f 9 9 9 9 . 
+            . 9 9 9 9 1 1 9 9 9 1 1 9 9 9 . 
+            . 9 9 9 1 1 1 1 9 1 1 1 1 9 9 . 
+            9 9 9 9 1 1 8 8 9 1 1 8 8 9 9 9 
+            9 9 9 9 1 1 8 8 9 1 1 8 8 9 9 9 
+            9 9 9 9 9 1 1 9 9 9 1 1 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
             . 9 9 9 9 9 9 9 9 9 9 9 9 9 9 . 
-            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
-            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
-            9 9 9 1 1 1 9 1 1 1 9 1 1 1 9 9 
-            9 9 1 1 9 1 1 1 9 1 1 1 9 1 1 9 
-            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
-            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
-            9 9 9 . . 9 9 . . 9 9 . . 9 9 9 
-            9 9 9 . . 9 9 . . 9 9 . . 9 9 9 
+            . 9 9 9 9 . 9 9 9 9 . 9 9 9 9 . 
+            . . 9 9 . . . 9 9 . . . 9 9 . . 
             `)
     } else if (sprites.readDataString(sprite, "colour") == "yellow") {
         sprite.setImage(img`
             . . . . . 5 5 5 5 5 5 . . . . . 
-            . . . . 5 5 5 5 5 5 5 5 . . . . 
             . . . 5 5 5 5 5 5 5 5 5 5 . . . 
             . . 5 5 5 5 5 5 5 5 5 5 5 5 . . 
-            . . 5 5 5 5 5 5 5 5 5 5 5 5 . . 
-            . 5 5 5 5 1 1 5 5 1 1 5 5 5 5 . 
-            . 5 5 5 5 1 f 5 5 1 f 5 5 5 5 . 
+            . 5 5 5 5 1 1 5 5 5 1 1 5 5 5 . 
+            . 5 5 5 1 1 1 1 5 1 1 1 1 5 5 . 
+            5 5 5 5 1 1 8 8 5 1 1 8 8 5 5 5 
+            5 5 5 5 1 1 8 8 5 1 1 8 8 5 5 5 
+            5 5 5 5 5 1 1 5 5 5 1 1 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
             . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            5 5 5 1 1 1 5 1 1 1 5 1 1 1 5 5 
-            5 5 1 1 5 1 1 1 5 1 1 1 5 1 1 5 
-            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            5 5 5 . . 5 5 . . 5 5 . . 5 5 5 
-            5 5 5 . . 5 5 . . 5 5 . . 5 5 5 
+            . 5 5 5 5 . 5 5 5 5 . 5 5 5 5 . 
+            . . 5 5 . . . 5 5 . . . 5 5 . . 
             `)
     } else {
         sprite.setImage(img`
             . . . . . 3 3 3 3 3 3 . . . . . 
-            . . . . 3 3 3 3 3 3 3 3 . . . . 
             . . . 3 3 3 3 3 3 3 3 3 3 . . . 
             . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-            . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
-            . 3 3 3 3 1 1 3 3 1 1 3 3 3 3 . 
-            . 3 3 3 3 1 f 3 3 1 f 3 3 3 3 . 
+            . 3 3 3 3 1 1 3 3 3 1 1 3 3 3 . 
+            . 3 3 3 1 1 1 1 3 1 1 1 1 3 3 . 
+            3 3 3 3 1 1 8 8 3 1 1 8 8 3 3 3 
+            3 3 3 3 1 1 8 8 3 1 1 8 8 3 3 3 
+            3 3 3 3 3 1 1 3 3 3 1 1 3 3 3 3 
+            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
             . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . 
-            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-            3 3 3 1 1 1 3 1 1 1 3 1 1 1 3 3 
-            3 3 1 1 3 1 1 1 3 1 1 1 3 1 1 3 
-            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-            3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-            3 3 3 . . 3 3 . . 3 3 . . 3 3 3 
-            3 3 3 . . 3 3 . . 3 3 . . 3 3 3 
+            . 3 3 3 3 . 3 3 3 3 . 3 3 3 3 . 
+            . . 3 3 . . . 3 3 . . . 3 3 . . 
             `)
     }
 }
@@ -200,6 +197,9 @@ function createEnemy (colour: string) {
 scene.onHitWall(SpriteKind.Enemy, function (sprite, location) {
     randomTurn(sprite, enemyNormalSpeed)
 })
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    pacmanDirection = 1
+})
 function 放置豆豆 () {
     for (let 值2 of tiles.getTilesByType(myTiles.tile2)) {
         豆 = sprites.create(img`
@@ -234,6 +234,9 @@ function turn (target: Sprite, direction: number, speed: number) {
         target.setVelocity(0 - speed, 0)
     }
 }
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    pacmanDirection = 2
+})
 scene.onOverlapTile(SpriteKind.Enemy, myTiles.tile8, function (sprite, location) {
     teleportToRight(sprite)
 })
@@ -253,21 +256,21 @@ sprites.onOverlap(SpriteKind.Pacman, SpriteKind.WeakEnemy, function (sprite, oth
     info.changeScoreBy(50)
     otherSprite.setImage(img`
         . . . . . f f f f f f . . . . . 
-        . . . . f . . . . . . f . . . . 
-        . . . f . . . . . . . . f . . . 
-        . . f . . . . . . . . . . f . . 
-        . . f . . . . . . . . . . f . . 
-        . f . . . 1 1 . . 1 1 . . . f . 
-        . f . . . 1 . . . 1 . . . . f . 
-        . f . . . . . . . . . . . . f . 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . 1 1 1 . 1 1 1 . 1 1 1 . f 
-        f . 1 1 . 1 1 1 . 1 1 1 . 1 1 f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . f . . f f . . f f . . f . f 
-        f f f . . f f . . f f . . f f f 
+        . . . f f f f f f f f f f . . . 
+        . . f f f f f f f f f f f f . . 
+        . f f f f 1 1 f f f 1 1 f f f . 
+        . f f f 1 1 1 1 f 1 1 1 1 f f . 
+        f f f f 1 1 8 8 f 1 1 8 8 f f f 
+        f f f f 1 1 8 8 f 1 1 8 8 f f f 
+        f f f f f 1 1 f f f 1 1 f f f f 
+        f f f f f f f f f f f f f f f f 
+        f f f f f f f f f f f f f f f f 
+        f f f f f f f f f f f f f f f f 
+        f f f f f f f f f f f f f f f f 
+        f f f f f f f f f f f f f f f f 
+        . f f f f f f f f f f f f f f . 
+        . f f f f . f f f f . f f f f . 
+        . . f f . . . f f . . . f f . . 
         `)
     otherSprite.setKind(SpriteKind.DeadEnemy)
     otherSprite.setVelocity(otherSprite.vx * (deadEnemySpeed / weakEnemySpeed), otherSprite.vy * (deadEnemySpeed / weakEnemySpeed))
@@ -286,30 +289,27 @@ sprites.onOverlap(SpriteKind.Pacman, SpriteKind.MagicBean, function (sprite, oth
         值3.setVelocity(值3.vx * (weakEnemySpeed / enemyNormalSpeed), 值3.vy * (weakEnemySpeed / enemyNormalSpeed))
         值3.setImage(img`
             . . . . . 8 8 8 8 8 8 . . . . . 
-            . . . . 8 8 8 8 8 8 8 8 . . . . 
             . . . 8 8 8 8 8 8 8 8 8 8 . . . 
             . . 8 8 8 8 8 8 8 8 8 8 8 8 . . 
-            . . 8 8 8 8 8 8 8 8 8 8 8 8 . . 
-            . 8 8 8 8 1 1 8 8 1 1 8 8 8 8 . 
-            . 8 8 8 8 1 f 8 8 1 f 8 8 8 8 . 
+            . 8 8 8 8 1 1 8 8 8 1 1 8 8 8 . 
+            . 8 8 8 1 1 1 1 8 1 1 1 1 8 8 . 
+            8 8 8 8 1 1 1 1 8 1 1 1 1 8 8 8 
+            8 8 8 8 1 1 1 1 8 1 1 1 1 8 8 8 
+            8 8 8 8 8 1 1 8 8 8 1 1 8 8 8 8 
+            8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
+            8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
+            8 1 8 8 8 1 8 8 8 1 8 8 8 1 8 8 
+            8 8 1 8 1 8 1 8 1 8 1 8 1 8 8 8 
+            8 8 8 1 8 8 8 1 8 8 8 1 8 8 8 8 
             . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-            8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
-            8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
-            8 8 8 1 1 1 8 1 1 1 8 1 1 1 8 8 
-            8 8 1 1 8 1 1 1 8 1 1 1 8 1 1 8 
-            8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
-            8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
-            8 8 8 . . 8 8 . . 8 8 . . 8 8 8 
-            8 8 8 . . 8 8 . . 8 8 . . 8 8 8 
+            . 8 8 8 8 . 8 8 8 8 . 8 8 8 8 . 
+            . . 8 8 . . . 8 8 . . . 8 8 . . 
             `)
     }
     info.startCountdown(15)
 })
 scene.onOverlapTile(SpriteKind.DeadEnemy, myTiles.tile9, function (sprite, location) {
     teleportToLeft(sprite)
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    pacmanDirection = 3
 })
 scene.onOverlapTile(SpriteKind.WeakEnemy, myTiles.tile8, function (sprite, location) {
     teleportToRight(sprite)
